@@ -149,4 +149,16 @@ public_users.get('/async/title/:title', async (req, res) => {
   }
 });
 
+// Task 5 (async version): get book review by ISBN (async-await)
+public_users.get('/async/review/:isbn', async (req, res) => {
+    try {
+      const response = await axios.get(
+        `${baseUrl(req)}/review/${encodeURIComponent(req.params.isbn)}`
+      );
+      return res.status(200).json(response.data);
+    } catch (error) {
+      return handleError(res, error, "Error fetching book review");
+    }
+  });
+  
 module.exports.general = public_users;
